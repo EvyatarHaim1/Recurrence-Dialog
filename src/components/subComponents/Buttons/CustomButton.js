@@ -8,13 +8,13 @@ import { Button, makeStyles } from '@material-ui/core';
 // }));
 
 
-const CustomButton = ({ title, onClick }) => {
+const CustomButton = ({ title, onClick, type }) => {
     // const classes = useStyles();
 
     return (
         <Button
             // classes={{ color: classes.color }} 
-            onClick={onClick}>{title}</Button>
+            onClick={onClick} color="primary" variant="primary" type={type}>{title}</Button>
     )
 }
 

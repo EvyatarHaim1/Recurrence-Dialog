@@ -4,32 +4,62 @@ import { RefreshTwoTone, KeyboardTab, FlipCameraAndroid } from '@material-ui/ico
 import ActionRow from '../../subComponents/ActionRow/ActionRow';
 import EventTitle from '../../subComponents/EventTitle';
 import Buttons from '../../subComponents/Buttons/Buttons';
+import { db } from "../../../firebase";
 
-const EventBlock = ({ isTitle, values, params }) => {
+const EventBlock = ({ isTitle, values, params, id }) => {
     const title = isTitle || "Custom recurrence";
 
-    const firstAction = {
-        values: [1, 2, 3, 4, 5],
-        params: ["day", "week", "month", "year"],
+    const repeatEvery = {
+        first: {
+            values: [1, 2, 3, 4, 5],
+            value: 1,
+        },
+        second: {
+            values: ["day", "week", "month", "year"],
+            value: "week",
+        }
     }
 
-    const secondAction = {
-        values: [1, 2, 3, 4, 5],
-        params: ["day", "week", "month", "year"],
+    const repeatOn = {
+        first: {
+            values: ["M", "T", "W", "T", "F", "S", "S"],
+            value: "",
+        },
+        second: {
+            values: ["second Wednesday of the...", "14th day of the month", "second Sunday of the month"],
+            value: "second Sunday of the month",
+        },
     }
 
-    const thirdAction = {
-        values: ["never", "after", "on"],
-        params: ["day", "week", "month", "year"],
+    const ends = {
+        first: {
+            values: ["never", "after", "on"],
+            value: "never",
+        },
+        second: {
+            values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+            value: Date.now(),
+        },
+    }
+
+    const saveEvent = () => {
+
+    }
+
+    const deleteEvent = () => {
+        db.collection('events').doc(id).delete().then(() => {
+        }).catch((error) => {
+            console.error("Error removing event: ", error);
+        });
     }
 
     return (
         <Container>
             <EventTitle title={title} />
-            <ActionRow icon={<RefreshTwoTone />} action="Repeat every" values={firstAction.values} params={firstAction.params} />
-            <ActionRow icon={<FlipCameraAndroid />} action="Repeat on" values={secondAction.values} params={secondAction.params} />
-            <ActionRow icon={<KeyboardTab />} action="Ends" values={thirdAction.values} params={thirdAction.params} />
-            <Buttons />
+            <ActionRow icon={<RefreshTwoTone />} action="Repeat every" data={repeatEvery} />
+            <ActionRow icon={<FlipCameraAndroid />} action="Repeat on" data={repeatOn} />
+            <ActionRow icon={<KeyboardTab />} action="Ends" data={ends} />
+            <Buttons onSave={saveEvent} onDelete={deleteEvent} />
         </Container>
     )
 }

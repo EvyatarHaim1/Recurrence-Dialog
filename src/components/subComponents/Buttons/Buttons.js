@@ -2,20 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import CustomButton from './CustomButton';
 
-const Buttons = () => {
+const Buttons = ({ onSave, onDelete }) => {
 
-    const close = () => {
-
-    }
-
-    const done = () => {
-
-    }
+    const deleteEvent = () => { onDelete() }
 
     return (
         <Container>
-            <CustomButton variant="primary" title="Cancle" onClick={close} />
-            <CustomButton variant="secondary" title="Done" onClick={done} />
+            <CustomButton variant="primary" type="submit" title="Cancle" onClick={onSave} />
+            <CustomButton variant="secondary" title="Done" onClick={deleteEvent} />
         </Container>
     )
 }

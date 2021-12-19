@@ -22,7 +22,7 @@ const Events = () => {
         dispatch({ type: 'FETCH_ALL_EVENETS', payload: savedEvents });
     }, [dispatch, savedEvents]);
 
-    const allEvents = savedEvents.map(e => <EventBlock key={e.id} isTitle={e.data.title} />)
+    const allEvents = savedEvents.map(e => <EventBlock id={e.id} key={e.id} isTitle={e.data.title} />)
 
     const defaultEvent = <EventBlock isTitle="Custom recurrence" />
 
