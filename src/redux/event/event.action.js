@@ -1,11 +1,9 @@
-export const UPDATE_CITY = 'UPDATE_CITY';
-export const GET_CURRENT_WEATHER = 'GET_CURRENT_WEATHER';
-export const GET_FIVE_DAYS_FORECAST = 'GET_FIVE_DAYS_FORECAST';
+export const SAVE_EVENT = 'SAVE_EVENT';
+export const DELETE_EVENT = 'DELETE_EVENT';
+export const FETCH_ALL_EVENTS = 'FETCH_ALL_EVENTS';
 
+export const fetchAllEvents = (events) => { return { type: FETCH_ALL_EVENTS, payload: events } }
 
+export const saveEvent = (event) => { return { type: SAVE_EVENT, payload: event } }
 
-export const updateCity = (city) => { return { type: UPDATE_CITY, payload: city } }
-
-export const getCurrentWeather = (currentWeather) => { return { type: GET_CURRENT_WEATHER, payload: currentWeather } }
-
-export const getFiveDaysForecast = (forecast) => { return { type: GET_FIVE_DAYS_FORECAST, payload: forecast } }
+export const deleteEvent = (event) => { return { type: DELETE_EVENT, payload: event } }

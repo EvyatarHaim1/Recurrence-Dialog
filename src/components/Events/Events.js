@@ -1,23 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux'
 import EventBlock from './EventBlock/EventBlock';
+import { db } from "../../firebase";
 
 const Events = () => {
+    const dispatch = useDispatch();
+    const [savedEvents, setSavedEvents,] = useState([]);
 
-    const savedEvents = true;
+    useEffect(() => {
+        db.collection('events')
+            .orderBy('timestamp', 'desc')
+            .onSnapshot((snapshot) =>
+                setSavedEvents(
+                    snapshot.docs.map((doc) => ({
+                        id: doc.id,
+                        data: doc.data(),
+                    })
+                    ))
+            )
+        dispatch({ type: 'FETCH_ALL_EVENETS', payload: savedEvents });
+    }, [dispatch, savedEvents]);
 
-    const showEvents = savedEvents ? (
-        <>
-            <EventBlock isTitle="doing workout" />
-            <EventBlock isTitle="watching movie with my gf" />
-            <EventBlock isTitle="playing guitar" />
-            <EventBlock isTitle="showing the app to Tal" />
-            <EventBlock />
-        </>
-    ) : <EventBlock isTitle="doing workout" />
+    const allEvents = savedEvents.map(e => <EventBlock key={e.id} isTitle={e.data.title} />)
+
+    const defaultEvent = <EventBlock isTitle="Custom recurrence" />
+
     return (
         <Container>
-            {showEvents}
+            {defaultEvent}
+            {allEvents}
         </Container>
     )
 }

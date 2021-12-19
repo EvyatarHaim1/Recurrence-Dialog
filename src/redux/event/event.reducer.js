@@ -1,39 +1,48 @@
 import {
-    UPDATE_CITY,
-    GET_CURRENT_WEATHER,
-    GET_FIVE_DAYS_FORECAST
+    FETCH_ALL_EVENTS,
+    SAVE_EVENT,
+    DELETE_EVENT,
 } from "./event.action";
 
 const initialState = {
-    city: 'tel aviv',
-    locationKey: '215854',
-    current_Weather_Metric: '',
-    current_Weather_Imperial: '',
-    weatherStatus: '',
-    dailyForecast: [],
-    headlineText: '',
+    events: [],
+    event: {
+        _id: "1569454a",
+        title: "Custom recurrence",
+        timestamp: Date.now(),
+        repeatEvery: {
+            quantity: 1,
+            duration: "week"
+        },
+        repeatOn: {
+            day: "M",
+            timeInfo: "second Sunday of the month"
+        },
+        ends: {
+            selection: "never",
+            date: Date.now(),
+            quantity: 12,
+        },
+    }
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action) => {
     switch (action.type) {
-        case UPDATE_CITY:
+        case FETCH_ALL_EVENTS:
             return {
                 ...state,
-                city: action.payload.city,
-                locationKey: action.payload.key
+                events: action.payload
             }
-        case GET_CURRENT_WEATHER:
+        case SAVE_EVENT:
             return {
                 ...state,
-                current_Weather_Metric: action.payload.tempC,
-                current_Weather_Imperial: action.payload.tempF,
-                weatherStatus: action.payload.weatherStatus
+                event: action.payload,
             }
-        case GET_FIVE_DAYS_FORECAST:
+        case DELETE_EVENT:
             return {
                 ...state,
-                dailyForecast: action.payload.forecast,
-                headlineText: action.payload.headlineText
+                event: action.payload,
             }
         default:
             return state;
