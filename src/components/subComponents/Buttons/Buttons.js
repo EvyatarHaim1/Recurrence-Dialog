@@ -14,8 +14,8 @@ const Buttons = () => {
 
     return (
         <Container>
-            <CustomButton title="Cancle" onClick={close} />
-            <CustomButton title="Done" onClick={done} />
+            <CustomButton variant="primary" title="Cancle" onClick={close} />
+            <CustomButton variant="secondary" title="Done" onClick={done} />
         </Container>
     )
 }
