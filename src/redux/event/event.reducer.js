@@ -2,6 +2,7 @@ import {
     FETCH_ALL_EVENTS,
     SAVE_EVENT,
     DELETE_EVENT,
+    CHANGE_TITLE,
 } from "./event.action";
 
 const initialState = {
@@ -43,6 +44,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 event: action.payload,
+            }
+        case CHANGE_TITLE:
+            return {
+                ...state,
+                title: action.payload,
             }
         default:
             return state;

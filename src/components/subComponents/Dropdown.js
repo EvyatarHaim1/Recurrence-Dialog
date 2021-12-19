@@ -16,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dropdown({ values, params }) {
     const classes = useStyles();
+    // const [selection, setSelection] = useState(initialState)
     const [state, setState] = React.useState({
-        age: '',
+        age: values[0],
         name: 'hai',
     });
 
@@ -32,7 +33,7 @@ export default function Dropdown({ values, params }) {
     return (
         <div>
             <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">{values[0]}</InputLabel>
+                <InputLabel htmlFor="outlined-age-native-simple">{state.age}</InputLabel>
                 <Select
                     native
                     value={state.age}
@@ -43,9 +44,8 @@ export default function Dropdown({ values, params }) {
                         id: 'outlined-age-native-simple',
                     }}
                 >
-                    <option aria-label="None" value="" />
                     {values?.map(item => (
-                        <option value={item}>{item}</option>
+                        <option value={item} key={item}>{item}</option>
                     ))}
                 </Select>
             </FormControl>

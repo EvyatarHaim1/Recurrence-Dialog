@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import EventBlock from './EventBlock/EventBlock';
 import { db } from "../../firebase";
 
