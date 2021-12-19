@@ -4,12 +4,12 @@ import CustomButton from './CustomButton';
 
 const Buttons = ({ onSave, onDelete }) => {
 
-    const deleteEvent = () => { onDelete() }
+    const deleteEvent = () => onDelete();
 
     return (
         <Container>
-            <CustomButton variant="primary" type="submit" title="Cancle" onClick={onSave} />
-            <CustomButton variant="secondary" title="Done" onClick={deleteEvent} />
+            <CustomButton variant="primary" title="Cancle" onClick={deleteEvent} />
+            <CustomButton variant="secondary" type="submit" title="Done" onClick={onSave} />
         </Container>
     )
 }
