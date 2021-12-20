@@ -23,7 +23,7 @@ const EventBlock = ({ isTitle, id, key, data }) => {
     const repeatOn = {
         first: {
             values: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            value: "",
+            value: "Monday",
         },
         second: {
             values: ["second Wednesday of the...", "14th day of the month", "second Sunday of the month"],

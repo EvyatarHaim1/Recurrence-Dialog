@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 
-const ToggleButton = ({ day }) => {
+const ToggleBtn = ({ day }) => {
     const [selected, setSelected] = useState(false);
 
     return (
         <ToggleButton
-            value="check"
+            value={day}
             selected={selected}
             onChange={() => {
                 setSelected(!selected);
             }}
         >
-            {day}
+            {day[0]}
         </ToggleButton>
     );
 }
-export default ToggleButton;
+export default ToggleBtn;

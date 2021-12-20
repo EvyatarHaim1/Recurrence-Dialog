@@ -2,6 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
 import Dropdown from '../Dropdown';
+import ToggleBtn from '../Buttons/ToggleButton';
 
 const ActionRow = ({ icon, action, data }) => {
     return (
@@ -12,12 +13,18 @@ const ActionRow = ({ icon, action, data }) => {
                 style={{
                     fontWeight: 500,
                     overflow: "hidden",
-                    whiteSpace: "nowrap"
+                    whiteSpace: "nowrap",
+                    marginRight: "8px",
                 }}>
                 {action}
             </Typography>
-            <Dropdown data={data.first} action={action} />
-            <Dropdown data={data.second} action={action} />
+            {action === "Repeat on" ? data.first.values.map((day) => <ToggleBtn day={day} />
+            ) : (
+                <>
+                    <Dropdown data={data.first} action={action} />
+                    <Dropdown data={data.second} action={action} />
+                </>
+            )}
         </Row>
     )
 }
