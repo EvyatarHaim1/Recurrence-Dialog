@@ -6,8 +6,8 @@ import EventTitle from '../../subComponents/EventTitle';
 import Buttons from '../../subComponents/Buttons/Buttons';
 import { db } from "../../../firebase";
 
-const EventBlock = ({ isTitle, values, params, id }) => {
-    const title = isTitle || "Custom recurrence";
+const EventBlock = ({ isTitle, id, key, data }) => {
+    const title = data?.title || "Custom recurrence";
 
     const repeatEvery = {
         first: {
@@ -22,7 +22,7 @@ const EventBlock = ({ isTitle, values, params, id }) => {
 
     const repeatOn = {
         first: {
-            values: ["M", "T", "W", "T", "F", "S", "S"],
+            values: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             value: "",
         },
         second: {

@@ -8,8 +8,8 @@ const Buttons = ({ onSave, onDelete }) => {
 
     return (
         <Container>
-            <CustomButton variant="primary" title="Cancle" onClick={deleteEvent} />
-            <CustomButton variant="secondary" type="submit" title="Done" onClick={onSave} />
+            <CustomButton title="Cancle" onClick={deleteEvent} />
+            <CustomButton type="submit" title="Done" onClick={onSave} />
         </Container>
     )
 }

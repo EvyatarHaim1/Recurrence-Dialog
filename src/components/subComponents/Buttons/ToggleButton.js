@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import CheckIcon from '@material-ui/icons/Check';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 
-const ToggleButton = () => {
+const ToggleButton = ({ day }) => {
     const [selected, setSelected] = useState(false);
 
     return (
@@ -13,7 +12,7 @@ const ToggleButton = () => {
                 setSelected(!selected);
             }}
         >
-            <CheckIcon />
+            {day}
         </ToggleButton>
     );
 }

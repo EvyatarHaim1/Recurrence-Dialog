@@ -3,12 +3,14 @@ html,
 body {
   margin: 0px;
   padding: 0px;
+  font-family: "DM Sans";
 }
 body {
+  background-color: #ebeff5;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    "DM Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

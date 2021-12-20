@@ -9,10 +9,13 @@ import Calendar from '../subComponents/Calendar';
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 120,
+        minWidth: 40,
     },
     selectEmpty: {
         marginTop: theme.spacing(2),
+    },
+    option: {
+        color: "#566B80"
     },
 }));
 
@@ -35,24 +38,23 @@ export default function Dropdown({ data, action }) {
     return (
         <div>
             {showDatePicker}
-            <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel htmlFor="outlined-age-native-simple">{selected}</InputLabel>
+            <FormControl size="small" margin="dense" variant="outlined" className={classes.formControl}>
                 <Select
+                    className={classes.option}
                     native
                     value={selected}
                     onChange={handleChange}
-                    label="selected"
                     inputProps={{
                         name: action,
                         id: 'outlined-age-native-simple',
                     }}
                 >
                     {data.values?.map(item => (
-                        <option value={item} key={item}>{item}</option>
+                        <option className={classes.option} value={item} key={item} > {item}</option>
                     ))}
                 </Select>
             </FormControl>
-            <Calendar />
-        </div>
+            {/* <Calendar /> */}
+        </div >
     );
 }
