@@ -7,6 +7,7 @@ const ToggleBtn = ({ day }) => {
     return (
         <ToggleButton
             value={day}
+            style={{ marginRight: '8px' }}
             selected={selected}
             onChange={() => {
                 setSelected(!selected);
