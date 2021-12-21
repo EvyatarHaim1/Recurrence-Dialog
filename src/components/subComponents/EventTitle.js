@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 
@@ -7,10 +7,15 @@ const EventTitle = ({ title }) => {
     const [initialTitle, setTitle] = useState(title);
 
     const handleChange = (e) => {
+        e.persist();
         setTitle(e.target.value);
-        const updated = dispatch({ type: 'CHANGE_TITLE', payload: initialTitle });
-        console.log(updated)
+        const updateTitle = dispatch({ type: 'CHANGE_TITLE', payload: e.target.value });
+        console.log(updateTitle);
     }
+
+    useEffect(() => {
+        console.log(initialTitle);
+    }, [initialTitle]);
 
     return (
         <Title placeholder={initialTitle} value={initialTitle} onChange={handleChange} />

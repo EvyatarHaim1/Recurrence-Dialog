@@ -1,10 +1,13 @@
 import React from 'react';
 import { Button, makeStyles } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     btn: {
         fontFamily: 'Poppins !important',
         fontsize: "12 !important",
+    },
+    disable: {
     },
     primarybtn: {
         backgroundColor: "#2E3F50",
@@ -18,13 +21,12 @@ const useStyles = makeStyles((theme) => ({
         color: "#2E3F50",
         marginRight: theme.spacing(1),
     },
-
-
 }));
 
 
 const CustomButton = ({ title, onClick, type }) => {
     const classes = useStyles();
+    const defaultTitle = useSelector((state) => state.event.event.title);
 
     return (
         <Button
@@ -32,6 +34,7 @@ const CustomButton = ({ title, onClick, type }) => {
             onClick={onClick}
             variant="outlined"
             size="medium"
+            disabled={false}
             type={type}>
             {title}
         </Button>

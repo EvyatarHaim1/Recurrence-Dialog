@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
@@ -21,23 +20,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dropdown({ data, action }) {
     const classes = useStyles();
-    const [dateOpen, setDateOpen] = useState(false);
     const [selected, setSelected] = useState(data.value);
-
-    useEffect(() => {
-        if (action === "Ends" && data.value === "on") { setDateOpen(true) };
-    }, [action, data.value]);
 
     const handleChange = (event) => {
         setSelected(event.target.value);
     }
 
-    let showDatePicker = dateOpen && (
-        <Calendar isDate />);
 
     return (
         <div>
-            {showDatePicker}
             <FormControl size="small" margin="dense" variant="outlined" className={classes.formControl}>
                 <Select
                     className={classes.option}
@@ -50,11 +41,10 @@ export default function Dropdown({ data, action }) {
                     }}
                 >
                     {data.values?.map(item => (
-                        <option className={classes.option} value={item} key={item} > {item}</option>
+                        <option className={classes.option} value={item} key={item}> {item}</option>
                     ))}
                 </Select>
             </FormControl>
-            {/* <Calendar /> */}
         </div >
     );
 }

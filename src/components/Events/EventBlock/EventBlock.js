@@ -1,49 +1,70 @@
 import React from 'react';
 import styled from 'styled-components';
 import { RefreshTwoTone, KeyboardTab, FlipCameraAndroid } from '@material-ui/icons';
+import { useDispatch, useSelector } from 'react-redux';
+import firebase from 'firebase';
+
+import { repeatEvery, repeatOn, ends } from '../../subComponents/DropDownOptions';
 import ActionRow from '../../subComponents/ActionRow/ActionRow';
 import EventTitle from '../../subComponents/EventTitle';
 import Buttons from '../../subComponents/Buttons/Buttons';
 import { db } from "../../../firebase";
 
-const EventBlock = ({ isTitle, id, key, data }) => {
-    const title = data?.title || "Custom recurrence";
-
-    const repeatEvery = {
-        first: {
-            values: [1, 2, 3, 4, 5],
-            value: 1,
-        },
-        second: {
-            values: ["day", "week", "month", "year"],
-            value: "week",
-        }
-    }
-
-    const repeatOn = {
-        first: {
-            values: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-            value: "Monday",
-        },
-        second: {
-            values: ["second Wednesday of the...", "14th day of the month", "second Sunday of the month"],
-            value: "second Sunday of the month",
-        },
-    }
-
-    const ends = {
-        first: {
-            values: ["never", "after", "on"],
-            value: "never",
-        },
-        second: {
-            values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-            value: Date.now(),
-        },
-    }
+const EventBlock = ({ newEvent, id, data }) => {
+    const eventToSave = useSelector((state) => state.event.event);
 
     const saveEvent = () => {
-
+        db.collection('events').add({
+            title: eventToSave.title,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            repeatEvery: {
+                first: eventToSave.repeatEvery.first,
+                second: eventToSave.repeatEvery.second,
+            },
+            repeatOn: {
+                Monday: {
+                    selected: eventToSave.repeatOn.Monday.selected,
+                    timeInfo: eventToSave.repeatOn.Monday.timeInfo
+                },
+                Tuesday: {
+                    selected: eventToSave.repeatOn.Tuesday.selected,
+                    timeInfo: eventToSave.repeatOn.Tuesday.timeInfo
+                },
+                Wednesday: {
+                    selected: eventToSave.repeatOn.Wednesday.selected,
+                    timeInfo: eventToSave.repeatOn.Wednesday.timeInfo
+                },
+                Thursday: {
+                    selected: eventToSave.repeatOn.Thursday.selected,
+                    timeInfo: eventToSave.repeatOn.Thursday.timeInfo
+                },
+                Friday: {
+                    selected: eventToSave.repeatOn.Friday.selected,
+                    timeInfo: eventToSave.repeatOn.Friday.timeInfo
+                },
+                Saturday: {
+                    selected: eventToSave.repeatOn.Saturday.selected,
+                    timeInfo: eventToSave.repeatOn.Saturday.timeInfo
+                },
+                Sunday: {
+                    selected: eventToSave.repeatOn.Sunday.selected,
+                    timeInfo: eventToSave.repeatOn.Sunday.timeInfo
+                },
+            },
+            ends: {
+                never: {
+                    selected: eventToSave.ends.never.selected,
+                },
+                after: {
+                    selected: eventToSave.ends.after.selected,
+                    occurrences: eventToSave.ends.after.occurrences
+                },
+                on: {
+                    selected: eventToSave.ends.on.selected,
+                    date: eventToSave.ends.on.date,
+                }
+            }
+        });
     }
 
     const deleteEvent = () => {
@@ -55,7 +76,7 @@ const EventBlock = ({ isTitle, id, key, data }) => {
 
     return (
         <Container>
-            <EventTitle title={title} />
+            <EventTitle title={data.title} />
             <ActionRow icon={<RefreshTwoTone />} action="Repeat every" data={repeatEvery} />
             <ActionRow icon={<FlipCameraAndroid />} action="Repeat on" data={repeatOn} />
             <ActionRow icon={<KeyboardTab />} action="Ends" data={ends} />
