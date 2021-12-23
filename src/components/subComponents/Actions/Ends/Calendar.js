@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import styled from 'styled-components';
-
+import { useDispatch } from 'react-redux';
 import "react-datepicker/dist/react-datepicker.css";
+import { endsDate } from "../../../../redux/event/event.action";
 
-export const Picker = ({ isDate }) => {
-  const [startDate, setStartDate] = useState(new Date() || isDate);
+export const Picker = ({ date }) => {
+  const dispatch = useDispatch();
+  const [startDate, setStartDate] = useState(date || new Date());
+
+  const handleChange = (date) => {
+    console.log(date)
+    dispatch(endsDate(date));
+    setStartDate(date);
+  }
+
   return (
-    <DatePicker dateFormat="MMMM d, yyyy" selected={startDate} onChange={(date) => setStartDate(date)} />
+    <DatePicker dateFormat="MMMM d, yyyy" selected={startDate} onChange={handleChange} />
   );
 };
 
@@ -24,10 +33,10 @@ const Styles = styled.div`
  }
 `;
 
-export default function Calendar() {
+export default function Calendar({ date }) {
   return (
     <Styles>
-      <Picker />
+      <Picker date={date} />
     </Styles>
   );
 }

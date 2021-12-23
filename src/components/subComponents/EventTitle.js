@@ -1,20 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { changeTitle } from '../../redux/event/event.action';
 
-const EventTitle = ({ title, id }) => {
+const EventTitle = ({ title }) => {
     const dispatch = useDispatch();
-    const [initialTitle, setTitle] = useState(title);
-    //const update = useSelector(state => state.events.events)
+    const [initialTitle, setInitialTitle] = useState(title);
 
     const handleChange = (e) => {
         e.persist();
-        setTitle(e.target.value);
-        dispatch({ type: 'CHANGE_TITLE', payload: { id, title: e.target.value } });
+        setInitialTitle(e.target.value);
+        dispatch(changeTitle(e.target.value));
     }
-
-    //console.log(update);
-
 
     return (
         <Title placeholder={initialTitle} value={initialTitle} onChange={handleChange} />

@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useDispatch } from 'react-redux';
+import { endsSelected } from '../../../../redux/event/event.action';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -17,14 +18,15 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dropdown({ isPlural, setisPlural, options, chosen, action }) {
+export default function Dropdown({ options, chosen, setOption }) {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const [selected, setSelected] = useState(chosen);
+    const [selected, setSelected] = useState(options.findIndex((str) => str.split(" ")[0] === chosen));
 
     const handleChange = (e) => {
+        setOption(options[e.target.value].split(" ")[0])
         setSelected(e.target.value);
-        dispatch({ type: 'UPDATE_DROPDOWN_VALUE', payload: { action, selected } });
+        dispatch(endsSelected(options[e.target.value].split(" ")[0]));
     }
 
     return (
@@ -37,8 +39,8 @@ export default function Dropdown({ isPlural, setisPlural, options, chosen, actio
                     value={selected}
                     onChange={handleChange}
                 >
-                    {options?.map(item => (
-                        <option className={classes.option} value={item} key={item}> {item.split(" ")[0]}</option>
+                    {options?.map((item, i) => (
+                        <option className={classes.option} value={i} key={item}> {item.split(" ")[0]}</option>
                     ))}
                 </Select>
             </FormControl>

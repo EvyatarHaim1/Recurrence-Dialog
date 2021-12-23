@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import CustomButton from './CustomButton';
 
-const Buttons = ({ onSave, onDelete }) => {
+const Buttons = ({ onSave, onCancel }) => {
 
     return (
         <Container>
-            <CustomButton title="Cancel" onClick={onDelete} />
+            <CustomButton title="Cancel" onClick={onCancel} />
             <CustomButton type="submit" title="Done" onClick={onSave} />
         </Container>
     )

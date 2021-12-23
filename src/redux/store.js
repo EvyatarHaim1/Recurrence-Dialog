@@ -1,10 +1,10 @@
 import { applyMiddleware, createStore } from "redux";
 import reduxThunk from "redux-thunk";
 import { combineReducers } from "redux";
-import eventsReducer from './events/events.reducer';
+import eventReducer from './event/event.reducer';
 
 const reducers = combineReducers({
-    events: eventsReducer,
+    event: eventReducer,
 });
 
 const rootReducer = (state, action) => {

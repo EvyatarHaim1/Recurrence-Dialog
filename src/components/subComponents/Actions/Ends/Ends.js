@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from './Calendar';
-import Dropdown from './Dropdown';
+import Occurrences from './Occurrences';
 import { ends } from '../../DropDownOptions';
-
+import Dropdown from './Dropdown';
 
 function Ends({ data, action }) {
 
+    const [option, setOption] = useState(data.selected);
+
     const renderContent = () => {
-        switch (data.selected) {
+        switch (option) {
             case "never":
-                return <Dropdown chosen={data.selected} options={ends.options} action={action} />
+                return <Dropdown chosen={data.selected} options={ends.options} action={"never"} setOption={setOption} />
             case "after":
                 return (
                     <>
-                        <Dropdown chosen={data.selected} options={ends.occurrences} action={action} />
+                        <Dropdown chosen={data.selected} options={ends.options} action={"after"} setOption={setOption} />
+                        <Occurrences chosen={data.occurrences} options={ends.occurrences} action={action} />
                         <p>Occurrences</p>
                     </>
                 )
             case "on":
                 return (
                     <>
-                        <Dropdown chosen={data.selected} options={ends.options} action={action} />
-                        <Calendar isDate />
+                        <Dropdown chosen={data.selected} options={ends.options} action={"on"} setOption={setOption} />
+                        <Calendar date={new Date(data.date.seconds * 1000)} />
                     </>
                 )
             default:

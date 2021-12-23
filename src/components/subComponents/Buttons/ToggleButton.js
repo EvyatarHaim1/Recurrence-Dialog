@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import { useDispatch } from 'react-redux';
+import { repeatOnSelectDay } from '../../../redux/event/event.action';
+import { repeatOn } from '../DropDownOptions';
 
 const ToggleBtn = ({ day, clicked, timeInfo }) => {
     const [selected, setSelected] = useState(clicked);
@@ -13,7 +15,8 @@ const ToggleBtn = ({ day, clicked, timeInfo }) => {
             selected={selected}
             onChange={() => {
                 setSelected(!selected);
-                dispatch({ type: 'REPEAT_ON_SELECT_DAY', payload: { day, selected } });
+                const index = repeatOn.day.indexOf(day);
+                dispatch(repeatOnSelectDay({ index, day }));
             }}
         >
             {day[0]}

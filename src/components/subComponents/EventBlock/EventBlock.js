@@ -1,41 +1,48 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RefreshTwoTone, KeyboardTab, FlipCameraAndroid } from '@material-ui/icons';
-import { useSelector } from 'react-redux';
 import firebase from 'firebase';
+import { useDispatch, useSelector } from 'react-redux';
 
 import ActionRow from '../ActionRow/ActionRow';
 import EventTitle from '../EventTitle';
 import Buttons from '../Buttons/Buttons';
 import { db } from "../../../firebase";
+import { defaultEvent } from '../../../defaultEvent';
+import { resetEvent } from '../../../redux/event/event.action';
 
-const EventBlock = ({ newEvent, id, data }) => {
-    const eventToSave = useSelector((state) => state.events.events);
+const EventBlock = ({ id, data }) => {
+    const dispatch = useDispatch();
+    const currentEvent = useSelector(state => state.event.event);
 
     const saveEvent = () => {
-        db.collection('events').add({
-            title: eventToSave.title,
+        db.collection('events').doc(id).set({
+            title: currentEvent.title,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            repeatEvery: eventToSave.repeatEvery,
-            repeatOn: eventToSave.repeatOn,
-            ends: eventToSave.ends,
-        });
+            repeatEvery: currentEvent.repeatEvery,
+            repeatOn: currentEvent.repeatOn,
+            ends: currentEvent.ends,
+        }, { merge: true });
     }
 
-    const deleteEvent = () => {
-        db.collection('events').doc(id).delete().then(() => {
-        }).catch((error) => {
-            console.error("Error removing event: ", error);
-        });
+    const setEvent = () => {
+        // dispatch(resetEvent(defaultEvent))
+        db.collection('events').doc(id).set({
+            title: defaultEvent.title,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            repeatEvery: defaultEvent.repeatEvery,
+            repeatOn: defaultEvent.repeatOn,
+            ends: defaultEvent.ends,
+        }, { merge: true });
     }
 
     return (
         <Container>
-            <EventTitle title={data.title} id={id} />
+            <EventTitle title={data.title} />
             <ActionRow icon={<RefreshTwoTone />} action="Repeat every" data={data.repeatEvery} />
             <ActionRow icon={<FlipCameraAndroid />} action="Repeat on" data={data.repeatOn} />
             <ActionRow icon={<KeyboardTab />} action="Ends" data={data.ends} />
-            <Buttons onSave={saveEvent} onDelete={deleteEvent} />
+            <Buttons onSave={saveEvent} onCancel={setEvent} />
         </Container>
     )
 }
@@ -49,6 +56,6 @@ width:441px;
 height:312px;
 background:#ffffff;
 border-radius: 4px;
-margin:20px;
 padding:24px;
+margin:10% auto;
 `

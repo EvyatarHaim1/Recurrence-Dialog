@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { useDispatch } from 'react-redux';
-import { repeatEveryQuantity, repeatEveryTime } from '../../../../redux/event/event.action';
+import { endsOccurences } from '../../../../redux/event/event.action';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -18,31 +18,22 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dropdown({ options, chosen, isNumber, setIsPlural }) {
+export default function Dropdown({ options, chosen, action }) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [selected, setSelected] = useState(chosen);
-    //dispatch({ type: 'UPDATE_DROPDOWN_VALUE', payload: { action, selected } });
-
-    // useEffect(() => {
-    //     selected > 1 && setIsPlural(true);
-    // }, [selected, setIsPlural])
 
     const handleChange = (e) => {
-        if (isNumber) {
-            dispatch(repeatEveryQuantity(e.target.value))
-        } else {
-            dispatch(repeatEveryTime(e.target.value))
-        }
+        dispatch(endsOccurences(e.target.value));
         setSelected(e.target.value);
     }
-
 
     return (
         <div>
             <FormControl size="small" margin="dense" variant="outlined" className={classes.formControl}>
                 <Select
                     className={classes.option}
+                    style={{ minWidth: "70px", height: "44px" }}
                     native
                     value={selected}
                     onChange={handleChange}
