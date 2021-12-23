@@ -6,7 +6,7 @@ const Buttons = ({ onSave, onDelete }) => {
 
     return (
         <Container>
-            <CustomButton title="Cancle" onClick={onDelete} />
+            <CustomButton title="Cancel" onClick={onDelete} />
             <CustomButton type="submit" title="Done" onClick={onSave} />
         </Container>
     )

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -16,13 +17,21 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dropdown({ data, action }) {
+export default function Dropdown({ isPlural, setisPlural, options, chosen, action }) {
     const classes = useStyles();
-    const [selected, setSelected] = useState(data.value);
+    const dispatch = useDispatch();
+    const [selected, setSelected] = useState(chosen);
 
     const handleChange = (event) => {
         setSelected(event.target.value);
+        dispatch({ type: 'UPDATE_DROPDOWN_VALUE', payload: { action, selected } });
     }
+
+    useEffect(() => {
+        selected > 1 && setisPlural(true);
+    }, [selected])
+
+    const plural = isPlural && "s";
 
 
     return (
@@ -38,8 +47,8 @@ export default function Dropdown({ data, action }) {
                         id: 'outlined-age-native-simple',
                     }}
                 >
-                    {data.values?.map(item => (
-                        <option className={classes.option} value={item} key={item}> {item}</option>
+                    {options?.map(item => (
+                        <option className={classes.option} value={item} key={item}> {item}{plural}</option>
                     ))}
                 </Select>
             </FormControl>

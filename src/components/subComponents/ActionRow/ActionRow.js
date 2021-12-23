@@ -1,43 +1,20 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import styled from 'styled-components';
-import Dropdown from '../Dropdown';
-import ToggleBtn from '../Buttons/ToggleButton';
-import Calendar from '../Calendar';
+import RepeatEvery from '../Actions/RepeatEvery/RepeatEvery';
+import RepeatOn from '../Actions/RepeatOn/RepeatOn';
+import Ends from '../Actions/Ends/Ends';
 
 const ActionRow = ({ icon, action, data }) => {
 
-    const areDays = action === "Repeat on" && data.first.values.map((day) => <ToggleBtn key={day} day={day} />)
-
     const renderContent = () => {
-        if (action === "Repeat every") {
-            return (
-                <>
-                    <Dropdown data={data.first} action={action} />
-                    {<Dropdown data={data.second} action={action} />}
-                </>
-            )
-        }
-        else if (action === "Repeat on") {
-            return areDays
-        }
-        else {
-            if (data.first.value === "never") return <Dropdown data={data.first} action={action} />
-            else if (data.first.value === "after") {
-                return (
-                    <>
-                        <Dropdown data={data.first} action={action} />
-                        <p>Occurrences</p>
-                    </>
-                )
-            } else {
-                return (
-                    <>
-                        <Dropdown data={data.first} action={action} />
-                        <Calendar isDate />
-                    </>
-                )
-            }
+        switch (action) {
+            case "Repeat every":
+                return <RepeatEvery data={data} />
+            case "Repeat on":
+                return <RepeatOn data={data} />
+            default:
+                return <Ends data={data} />
         }
     }
 

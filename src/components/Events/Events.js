@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import EventBlock from './EventBlock/EventBlock';
+import EventBlock from '../subComponents/EventBlock/EventBlock';
 import { db } from "../../firebase";
+import { defaultEvent } from '../../defaultEvent';
 
 const Events = () => {
     const dispatch = useDispatch();
-    const newEvent = useSelector((state) => state.event.event);
-
-    const [savedEvents, setSavedEvents,] = useState([]);
+    const [savedEvents, setSavedEvents] = useState({});
+    const updated = useSelector(state => state.events.events)
 
     useEffect(() => {
         db.collection('events')
@@ -24,15 +24,13 @@ const Events = () => {
         dispatch({ type: 'FETCH_ALL_EVENETS', payload: savedEvents });
     }, [savedEvents]);
 
-    const defaultEvent = <EventBlock id={newEvent.id} data={newEvent} newEvent />
-
-    const allEvents = savedEvents.map(e => <EventBlock id={e.id} key={e.id} data={e.data} />)
-
+    const events = Object.values(savedEvents);
+    const allSavedEvents = events.map(e => <EventBlock id={e.id} key={e.id} data={e.data} />)
 
     return (
         <Container>
-            {defaultEvent}
-            {allEvents}
+            <EventBlock id={defaultEvent.id} data={defaultEvent.data} newEvent />
+            {allSavedEvents}
         </Container>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, makeStyles } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { defaultEvent } from '../../../defaultEvent';
 
 const useStyles = makeStyles((theme) => ({
     btn: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CustomButton = ({ title, onClick, type }) => {
     const classes = useStyles();
-    const defaultTitle = useSelector((state) => state.event.event.title);
+    const defaultTitle = defaultEvent.title;
 
     return (
         <Button
