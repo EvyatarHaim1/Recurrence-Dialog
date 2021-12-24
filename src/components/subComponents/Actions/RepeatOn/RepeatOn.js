@@ -1,7 +1,8 @@
 import React from 'react';
+
 import ToggleBtn from '../../Buttons/ToggleButton';
 
-function RepeatOn({ data, action }) {
+function RepeatOn({ data }) {
 
     const days = data.map((day) => {
         const currentDay = day[Object.keys(day)[0]];

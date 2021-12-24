@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { Typography } from '@material-ui/core';
+
 import Calendar from './Calendar';
 import Occurrences from './Occurrences';
 import { ends } from '../../DropDownOptions';
 import Dropdown from './Dropdown';
-import { Typography } from '@material-ui/core';
 
-function Ends({ data, action }) {
+function Ends({ data }) {
 
     const [option, setOption] = useState(data.selected);
     const [isPlural, setIsPlural] = useState(data.occurrences > 1 ? "s" : "");
@@ -31,8 +32,6 @@ function Ends({ data, action }) {
                 )
             default:
         }
-
-
     }
 
     return (

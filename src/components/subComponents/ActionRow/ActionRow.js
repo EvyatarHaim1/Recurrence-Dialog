@@ -1,11 +1,21 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, makeStyles } from '@material-ui/core';
 import styled from 'styled-components';
+
 import RepeatEvery from '../Actions/RepeatEvery/RepeatEvery';
 import RepeatOn from '../Actions/RepeatOn/RepeatOn';
 import Ends from '../Actions/Ends/Ends';
 
+const useStyles = makeStyles((theme) => ({
+    text: {
+        fontWeight: 500,
+        color: "#2E3F50",
+        justifyContent: "center"
+    },
+}));
+
 const ActionRow = ({ icon, action, data }) => {
+    const classes = useStyles();
 
     const renderContent = () => {
         switch (action) {
@@ -23,10 +33,11 @@ const ActionRow = ({ icon, action, data }) => {
             <Icon>{icon}</Icon>
             <Typography
                 variant="body1"
-                style={{ fontWeight: 500, overflow: "hidden", whiteSpace: "nowrap", marginRight: "8px" }}>
+                className={classes.text}
+            >
                 {action}
             </Typography>
-            {renderContent()}
+            <Content>{renderContent()}</Content>
         </Row>
     )
 }
@@ -40,5 +51,11 @@ align-items: center;
 margin-bottom:16px; 
 `
 const Icon = styled.div` 
+display: flex;
 margin-right: 17.23px;
+color:#2E3F50;
+justify-content: center;
+align-items: center;
+`
+const Content = styled.div`
 `

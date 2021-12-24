@@ -2,17 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { RefreshTwoTone, KeyboardTab, FlipCameraAndroid } from '@material-ui/icons';
 import firebase from 'firebase';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import ActionRow from '../ActionRow/ActionRow';
 import EventTitle from '../EventTitle';
 import Buttons from '../Buttons/Buttons';
 import { db } from "../../../firebase";
 import { defaultEvent } from '../../../defaultEvent';
-import { resetEvent } from '../../../redux/event/event.action';
 
 const EventBlock = ({ id, data }) => {
-    const dispatch = useDispatch();
     const currentEvent = useSelector(state => state.event.event);
 
     const saveEvent = () => {
@@ -26,7 +24,6 @@ const EventBlock = ({ id, data }) => {
     }
 
     const setEvent = () => {
-        // dispatch(resetEvent(defaultEvent))
         db.collection('events').doc(id).set({
             title: defaultEvent.title,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
@@ -34,6 +31,7 @@ const EventBlock = ({ id, data }) => {
             repeatOn: defaultEvent.repeatOn,
             ends: defaultEvent.ends,
         }, { merge: true });
+        window.location.reload();
     }
 
     return (

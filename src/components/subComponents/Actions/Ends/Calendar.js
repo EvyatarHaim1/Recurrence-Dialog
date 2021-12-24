@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import "react-datepicker/dist/react-datepicker.css";
+
 import { endsDate } from "../../../../redux/event/event.action";
 
 export const Picker = ({ date }) => {
@@ -10,7 +11,6 @@ export const Picker = ({ date }) => {
   const [startDate, setStartDate] = useState(date || new Date());
 
   const handleChange = (date) => {
-    console.log(date)
     dispatch(endsDate(date));
     setStartDate(date);
   }
@@ -21,8 +21,6 @@ export const Picker = ({ date }) => {
 };
 
 const Styles = styled.div`
- /* .react-datepicker-wrapper, */
- /* .react-datepicker__input-container, */
  .react-datepicker__input-container input {
    width: 150px;
    height: 44px;

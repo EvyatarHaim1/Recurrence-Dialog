@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
 import Dropdown from './Dropdown';
 import { repeatEvery } from '../../DropDownOptions';
 
-function RepeatEvery({ data, action }) {
+function RepeatEvery({ data }) {
     const [isPlural, setIsPlural] = useState(data.quantity > 1 ? "s" : "");
 
     return (

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { FormControl, Select } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
+
 import { endsOccurences } from '../../../../redux/event/event.action';
 
 const useStyles = makeStyles((theme) => ({

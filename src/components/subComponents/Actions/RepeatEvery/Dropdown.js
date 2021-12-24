@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { FormControl, Select } from '@material-ui/core/';
 import { useDispatch } from 'react-redux';
+
 import { repeatEveryQuantity, repeatEveryTime } from '../../../../redux/event/event.action';
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
-        minWidth: 40,
     },
     selectEmpty: {
         marginTop: theme.spacing(2),

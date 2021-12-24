@@ -1,12 +1,11 @@
 import React from 'react';
 import { Button, makeStyles } from '@material-ui/core';
-import { useSelector } from 'react-redux';
-import { defaultEvent } from '../../../defaultEvent';
 
 const useStyles = makeStyles((theme) => ({
     btn: {
-        fontFamily: 'Poppins !important',
-        fontsize: "12 !important",
+        fontsize: 12,
+        height: "40px",
+        padding: "0 20px 0 20px",
     },
     disable: {
     },
@@ -24,18 +23,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 const CustomButton = ({ title, onClick, type }) => {
     const classes = useStyles();
-    const defaultTitle = defaultEvent.title;
 
     return (
         <Button
             className={[classes.btn, type ? classes.primarybtn : classes.secondarybtn].join(" ")}
             onClick={onClick}
             variant="outlined"
-            size="medium"
-            disabled={false}
+            fontFamily="Poppins"
+            size="small"
             type={type}>
             {title}
         </Button>
