@@ -2,12 +2,10 @@ import React from 'react';
 import { Button, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-    btn: {
-        fontsize: 12,
+    root: {
         height: "40px",
         padding: "0 20px 0 20px",
-    },
-    disable: {
+        fontSize: "12px",
     },
     primarybtn: {
         backgroundColor: "#2E3F50",
@@ -28,10 +26,9 @@ const CustomButton = ({ title, onClick, type }) => {
 
     return (
         <Button
-            className={[classes.btn, type ? classes.primarybtn : classes.secondarybtn].join(" ")}
+            className={[classes.root, type ? classes.primarybtn : classes.secondarybtn].join(" ")}
             onClick={onClick}
             variant="outlined"
-            fontFamily="Poppins"
             size="small"
             type={type}>
             {title}

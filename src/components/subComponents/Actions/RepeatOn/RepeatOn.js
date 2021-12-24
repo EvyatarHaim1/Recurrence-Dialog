@@ -13,7 +13,7 @@ function RepeatOn({ data }) {
     })
 
     return (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", marginLeft: "4px" }}>
             {days}
         </div>
     )

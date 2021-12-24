@@ -23,8 +23,9 @@ export default EventTitle;
 
 const Title = styled.input`
 font-size: 22px;
+height:20px;
 font-weight: 500;
-margin-bottom: 28px;
+margin-bottom: 32px;
 border:none;
 color: #2E3F50;
 `

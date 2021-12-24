@@ -50,8 +50,8 @@ export default EventBlock;
 const Container = styled.div`
 display: flex; 
 flex-direction: column;
-width:441px;
-height:312px;
+width:417px;
+height:288px;
 background:#ffffff;
 border-radius: 4px;
 padding:24px;

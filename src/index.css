@@ -3,7 +3,7 @@ html,
 body {
   margin: 0px;
   padding: 0px;
-  font-family: "DM Sans";
+  font-family: "DM Sans", "Poppins";
 }
 body {
   background-color: #ebeff5;
@@ -14,5 +14,5 @@ body {
 }
 
 code {
-  font-family: "DM Sans";
+  font-family: "DM Sans", "Poppins";
 }

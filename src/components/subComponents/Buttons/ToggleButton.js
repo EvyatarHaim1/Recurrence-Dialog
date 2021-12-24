@@ -12,7 +12,7 @@ const ToggleBtn = ({ day, clicked }) => {
     return (
         <ToggleButton
             value={day}
-            style={{ margin: "0 4px 0 8px" }}
+            style={{ margin: "0 4px 0 4px" }}
             selected={selected}
             onChange={() => {
                 setSelected(!selected);

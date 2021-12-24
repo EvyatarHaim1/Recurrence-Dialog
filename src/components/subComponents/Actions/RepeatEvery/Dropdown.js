@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(2),
     },
     option: {
-        color: "#566B80"
+        color: "#566B80",
+        height: "44px",
     },
 }));
 

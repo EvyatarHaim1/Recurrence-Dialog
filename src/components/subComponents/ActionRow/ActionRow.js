@@ -48,6 +48,7 @@ const Row = styled.div`
 display: flex;
 justify-content: flex-start;
 align-items: center;
+height:44px;
 margin-bottom:16px; 
 `
 const Icon = styled.div` 
