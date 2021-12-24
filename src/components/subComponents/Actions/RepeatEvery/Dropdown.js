@@ -18,19 +18,19 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dropdown({ options, chosen, isNumber, setIsPlural }) {
+export default function Dropdown({ options, chosen, isNumber, isPlural, setIsPlural }) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [selected, setSelected] = useState(chosen);
-    //dispatch({ type: 'UPDATE_DROPDOWN_VALUE', payload: { action, selected } });
-
-    // useEffect(() => {
-    //     selected > 1 && setIsPlural(true);
-    // }, [selected, setIsPlural])
 
     const handleChange = (e) => {
         if (isNumber) {
             dispatch(repeatEveryQuantity(e.target.value))
+            if (e.target.value > 1) {
+                setIsPlural("s")
+            } else {
+                setIsPlural("")
+            }
         } else {
             dispatch(repeatEveryTime(e.target.value))
         }
@@ -48,7 +48,7 @@ export default function Dropdown({ options, chosen, isNumber, setIsPlural }) {
                     onChange={handleChange}
                 >
                     {options?.map(item => (
-                        <option className={classes.option} value={item} key={item}> {item}</option>
+                        <option className={classes.option} value={item} key={item}> {item}{isPlural}</option>
                     ))}
                 </Select>
             </FormControl>

@@ -18,13 +18,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Dropdown({ options, chosen, action }) {
+export default function Dropdown({ options, chosen, setIsPlural }) {
     const classes = useStyles();
     const dispatch = useDispatch();
     const [selected, setSelected] = useState(chosen);
 
     const handleChange = (e) => {
         dispatch(endsOccurences(e.target.value));
+        if (e.target.value > 1) {
+            setIsPlural("s")
+        } else {
+            setIsPlural("")
+        }
         setSelected(e.target.value);
     }
 

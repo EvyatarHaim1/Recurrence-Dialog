@@ -3,10 +3,12 @@ import Calendar from './Calendar';
 import Occurrences from './Occurrences';
 import { ends } from '../../DropDownOptions';
 import Dropdown from './Dropdown';
+import { Typography } from '@material-ui/core';
 
 function Ends({ data, action }) {
 
     const [option, setOption] = useState(data.selected);
+    const [isPlural, setIsPlural] = useState(data.occurrences > 1 ? "s" : "");
 
     const renderContent = () => {
         switch (option) {
@@ -16,8 +18,8 @@ function Ends({ data, action }) {
                 return (
                     <>
                         <Dropdown chosen={data.selected} options={ends.options} action={"after"} setOption={setOption} />
-                        <Occurrences chosen={data.occurrences} options={ends.occurrences} action={action} />
-                        <p>Occurrences</p>
+                        <Occurrences chosen={data.occurrences} options={ends.occurrences} setIsPlural={setIsPlural} />
+                        <Typography>Occurrence{isPlural}</Typography>
                     </>
                 )
             case "on":
