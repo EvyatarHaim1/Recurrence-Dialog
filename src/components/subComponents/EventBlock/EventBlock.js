@@ -23,13 +23,17 @@ const EventBlock = ({ id, data }) => {
         }, { merge: true });
     }
 
-    const setEvent = () => {
-        db.collection('events').doc(id).set({
+    const setEvent = async () => {
+        await db.collection('events').doc(id).set({
             title: defaultEvent.title,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             repeatEvery: defaultEvent.repeatEvery,
             repeatOn: defaultEvent.repeatOn,
-            ends: defaultEvent.ends,
+            ends: {
+                selected: "never",
+                occurrences: 1,
+                date: firebase.firestore.FieldValue.serverTimestamp(),
+            }
         }, { merge: true });
         window.location.reload();
     }
