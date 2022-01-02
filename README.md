@@ -7,3 +7,5 @@ Custom recurrence - Full-Stack app:
 - style- Material-UI, Styled-components
 - video presentation - Loom
 - packages - react-datepicker
+
+*deployed app - https://recurrence-dialog-evyatar.web.app/
