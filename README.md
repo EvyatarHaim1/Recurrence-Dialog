@@ -9,6 +9,7 @@ Custom recurrence - Full-Stack app:
 - packages - react-datepicker
 
 *deployed app - https://recurrence-dialog-evyatar.web.app/
+* loom presentation - https://www.loom.com/share/3b3cca3b1f2140c2bdaa0b61d9f7d0a7
 
 ![alt text](https://github.com/EvyatarHaim1/Recurrence-Dialog/blob/main/src/appScreenShot.png)
 
